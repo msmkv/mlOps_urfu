@@ -1,0 +1,31 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    agent any
+    stages {
+        stage('Informing') {
+            steps {
+                echo '--- Environment info ---'
+                sh 'python3 --version'
+                sh 'python3 -m pip --version'
+            }
+        }
+        stage('Getting repo') {
+            steps {
+                echo 'clone the repo'
+                sh 'rm -fr mlOps_urfu'
+                sh 'rm -fr requirements.txt'
+                sh 'git clone https://github.com/msmkv/mlOps_urfu.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'stage 2 here'
+                sh 'python3 -m pip freeze > ./mlOps_urfu/requirements.txt'
+                sh 'python3 -m pip install -r ./mlOps_urfu/requirements.txt'
+                sh 'chmod u+x ./mlOps_urfu/pipeline.sh'
+                sh './mlOps_urfu/pipeline.sh'
+            }
+        }
+    }
+}
