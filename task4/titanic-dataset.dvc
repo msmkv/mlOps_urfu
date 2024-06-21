@@ -1,0 +1,6 @@
+outs:
+- md5: 3902ddb2d8c22eb037b324cc6fc2840b.dir
+  size: 121792
+  nfiles: 2
+  hash: md5
+  path: titanic-dataset
